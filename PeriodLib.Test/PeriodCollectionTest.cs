@@ -132,6 +132,30 @@ namespace PeriodLib.Test
         {
             Assert.Fail();
         }
+        [TestMethod]
+        public void Equals_operator_returns_true_if_the_period_collections_are_equal()
+        {
+            Assert.Fail();
+        }
+
+        [TestMethod]
+        public void Equals_operator_returns_false_if_the_period_collections_are_not_equal()
+        {
+            Assert.Fail();
+        }
+
+
+        [TestMethod]
+        public void Not_equal_operator_returns_false_if_the_period_collections_are_equal()
+        {
+            Assert.Fail();
+        }
+
+        [TestMethod]
+        public void Not_equal_operator_returns_true_if_the_period_collections_are_not_equal()
+        {
+            Assert.Fail();
+        }
 
         [TestMethod]
         public void GetHashCode_returns_same_value_for_period_collections_that_are_equal()

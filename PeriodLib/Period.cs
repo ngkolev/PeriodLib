@@ -11,7 +11,7 @@ namespace PeriodLib
     /// This class represents Period, i.e., something that has start and end time
     /// </summary>
     [DebuggerDisplay("{Start} - {End}")]
-    public sealed class Period : IEquatable<Period>, PeriodLib.IPeriod
+    public sealed class Period : IEquatable<IPeriod>, PeriodLib.IPeriod
     {
         /// <summary>
         /// Create new Period
@@ -144,7 +144,7 @@ namespace PeriodLib
         /// <param name="other">The other period</param>
         /// <returns>True if the two periods overlap. Otherwise - false</returns>
         /// <exception cref="ArgumentNullException">Thrown if the argument is null</exception>
-        public bool IsOverlappingWith(Period other)
+        public bool IsOverlappingWith(IPeriod other)
         {
             throw new NotImplementedException();
         }
@@ -155,7 +155,7 @@ namespace PeriodLib
         /// <param name="periods">Collection periods</param>
         /// <returns>True if the period overlaps with any other period. Otherwise - false</returns>
         /// <exception cref="ArgumentNullException">Thrown if the argument is null</exception>
-        public bool IsOverlappingWith(IEnumerable<Period> periods)
+        public bool IsOverlappingWith(IEnumerable<IPeriod> periods)
         {
             throw new NotImplementedException();
         }
@@ -176,7 +176,7 @@ namespace PeriodLib
         /// <param name="other">The other period</param>
         /// <returns>True if the periods are equal</returns>
         /// <exception cref="ArgumentNullException">Thrown if the argument is null</exception>
-        public bool Equals(Period other)
+        public bool Equals(IPeriod other)
         {
             throw new NotImplementedException();
         }
