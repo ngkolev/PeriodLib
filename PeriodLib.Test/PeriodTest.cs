@@ -145,6 +145,12 @@ namespace PeriodLib.Test
         }
 
         [TestMethod]
+        public void Equals_period_throws_an_exception_if_the_argument_is_null()
+        {
+            Assert.Fail();
+        }
+
+        [TestMethod]
         public void GetHashCode_returns_same_value_for_periods_that_are_equal()
         {
             Assert.Fail();

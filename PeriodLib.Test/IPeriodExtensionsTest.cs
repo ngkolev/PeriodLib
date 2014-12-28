@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PeriodLib.Test
 {
-    [TestMethod]
+    [TestClass]
     public class IPeriodExtensionsTest
     {
         [TestMethod]

@@ -175,6 +175,7 @@ namespace PeriodLib
         /// </summary>
         /// <param name="other">The other period</param>
         /// <returns>True if the periods are equal</returns>
+        /// <exception cref="ArgumentNullException">Thrown if the argument is null</exception>
         public bool Equals(Period other)
         {
             throw new NotImplementedException();

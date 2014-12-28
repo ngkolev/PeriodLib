@@ -66,6 +66,7 @@ namespace PeriodLib
         /// </summary>
         /// <param name="periods">List of periods</param>
         /// <returns>True if there is overlapping</returns>
+        /// <exception cref="ArgumentNullException">Thrown if the argument is null</exception>
         public bool IsOverlappingWith(IEnumerable<IPeriod> periods)
         {
             throw new NotImplementedException();
@@ -76,6 +77,7 @@ namespace PeriodLib
         /// </summary>
         /// <param name="periods">The period collection argument</param>
         /// <returns>The new collection</returns>
+        /// <exception cref="ArgumentNullException">Thrown if the argument is null</exception>
         public PeriodCollection GetDifference(IEnumerable<IPeriod> periods)
         {
             throw new NotImplementedException();
@@ -86,6 +88,7 @@ namespace PeriodLib
         /// </summary>
         /// <param name="periods">The period collection argument</param>
         /// <returns>The new collection</returns>
+        /// <exception cref="ArgumentNullException">Thrown if the argument is null</exception>
         public Period GetIntersection(IEnumerable<IPeriod> periods)
         {
             throw new NotImplementedException();
@@ -98,7 +101,7 @@ namespace PeriodLib
         /// <returns>True if the periods are equal</returns>
         public override bool Equals(object obj)
         {
-            return base.Equals(obj);
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -106,6 +109,7 @@ namespace PeriodLib
         /// </summary>
         /// <param name="other">The other period</param>
         /// <returns>True if the periods are equal</returns>
+        /// <exception cref="ArgumentNullException">Thrown if the argument is null</exception>
         public bool Equals(Period other)
         {
             throw new NotImplementedException();
@@ -117,7 +121,7 @@ namespace PeriodLib
         /// <returns>Period collection's hash</returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -126,7 +130,7 @@ namespace PeriodLib
         /// <returns>Text representation of the period collection</returns>
         public override string ToString()
         {
-            return base.ToString();
+            throw new NotImplementedException();
         }
 
         /// <summary>
