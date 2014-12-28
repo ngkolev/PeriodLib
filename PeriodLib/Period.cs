@@ -171,6 +171,11 @@ namespace PeriodLib
         /// <exception cref="ArgumentNullException">Thrown if the argument is null</exception>
         public bool IsOverlappingWith(IPeriod other)
         {
+            if (other == null)
+            {
+                throw new ArgumentNullException("other");
+            }
+
             return other.Start < End && Start < other.End;
         }
 

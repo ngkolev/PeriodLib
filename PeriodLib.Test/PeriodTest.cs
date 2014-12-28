@@ -212,8 +212,8 @@ namespace PeriodLib.Test
         public void IsOverlappingWith_method_returns_false_if_the_periods_are_not_overlapping()
         {
             var period0 = new Period(new DateTime(2014, 12, 24), new DateTime(2015, 11, 27));
-            var period1 = new Period(new DateTime(2014, 11, 10), new DateTime(2015, 12, 23));
-            var period2 = new Period(new DateTime(2014, 11, 10), new DateTime(2015, 12, 24));
+            var period1 = new Period(new DateTime(2014, 9, 10), new DateTime(2014, 10, 23));
+            var period2 = new Period(new DateTime(2014, 11, 10), new DateTime(2014, 12, 24));
             var period3 = new Period(new DateTime(2015, 11, 27), new DateTime(2015, 12, 1));
             var period4 = new Period(new DateTime(2015, 11, 28), new DateTime(2015, 12, 1));
 
@@ -249,12 +249,12 @@ namespace PeriodLib.Test
         public void IsOverlappingWith_periods_collection_method_returns_false_if_the_periods_are_not_overlapping()
         {
             var period = new Period(new DateTime(2014, 12, 24), new DateTime(2015, 11, 27));
-            var collection = new[] {
-            
-             new Period(new DateTime(2014, 11, 10), new DateTime(2015, 12, 23)),
-             new Period(new DateTime(2014, 11, 10), new DateTime(2015, 12, 24)),
-             new Period(new DateTime(2015, 11, 27), new DateTime(2015, 12, 1)),
-             new Period(new DateTime(2015, 11, 28), new DateTime(2015, 12, 1)),
+            var collection = new[]
+            {
+                new Period(new DateTime(2014, 9, 10), new DateTime(2014, 10, 23)),
+                new Period(new DateTime(2014, 11, 10), new DateTime(2014, 12, 24)),
+                new Period(new DateTime(2015, 11, 27), new DateTime(2015, 12, 1)),
+                new Period(new DateTime(2015, 11, 28), new DateTime(2015, 12, 1)),
             };
 
             Assert.IsFalse(period.IsOverlappingWith(collection));

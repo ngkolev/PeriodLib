@@ -143,8 +143,8 @@ namespace PeriodLib.Test
             var otherEnd1 = new DateTime(2004, 1, 1);
             var otherItems = new[] 
             { 
-                new StubIPeriod{ StartGet = () => OtherStart0, EndGet = () => OtherEnd0 },
-                new StubIPeriod{ StartGet = () => OtherStart1, EndGet = () => OtherEnd1 },
+                new StubIPeriod{ StartGet = () => otherStart0, EndGet = () => otherEnd0 },
+                new StubIPeriod{ StartGet = () => otherStart1, EndGet = () => otherEnd1 },
             };
 
             var otherCollection = new PeriodCollection(otherItems);
