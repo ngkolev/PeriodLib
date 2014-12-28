@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="DateTimeExtensions.cs" />
     <Compile Include="IPeriod.cs" />
+    <Compile Include="IPeriodEnumerableExtensions.cs" />
     <Compile Include="IPeriodExtensions.cs" />
     <Compile Include="Period.cs" />
     <Compile Include="PeriodCollection.cs" />

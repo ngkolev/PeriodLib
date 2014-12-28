@@ -129,6 +129,16 @@ namespace PeriodLib
         }
 
         /// <summary>
+        /// Checks if time is overlapping with this period, i.e. if it is in this period
+        /// </summary>
+        /// <param name="other">The time argument</param>
+        /// <returns>True if the time is inside the interval. Otherwise - false</returns>
+        public bool IsOverlappingWith(DateTime time)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
         /// Checks if this period is overlapping with another period
         /// </summary>
         /// <param name="other">The other period</param>
@@ -142,7 +152,7 @@ namespace PeriodLib
         /// <summary>
         /// Checks if this period is overlapping with collection of periods
         /// </summary>
-        /// <param name="other">Collection periods</param>
+        /// <param name="periods">Collection periods</param>
         /// <returns>True if the period overlaps with any other period. Otherwise - false</returns>
         /// <exception cref="ArgumentNullException">Thrown if the argument is null</exception>
         public bool IsOverlappingWith(IEnumerable<Period> periods)
@@ -163,7 +173,7 @@ namespace PeriodLib
         /// <summary>
         /// Checks if two periods are equal
         /// </summary>
-        /// <param name="obj">The other period</param>
+        /// <param name="other">The other period</param>
         /// <returns>True if the periods are equal</returns>
         public bool Equals(Period other)
         {

@@ -51,6 +51,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="DateTimeExtensionsTest.cs" />
+    <Compile Include="IPeriodEnumerableExtensionsTest.cs" />
     <Compile Include="IPeriodExtensionsTest.cs" />
     <Compile Include="PeriodCollectionTest.cs" />
     <Compile Include="PeriodTest.cs" />

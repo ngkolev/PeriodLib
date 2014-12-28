@@ -67,6 +67,24 @@ namespace PeriodLib.Test
         }
 
         [TestMethod]
+        public void IsOverlappingWith_time_method_returns_true_if_the_periods_are_overlapping()
+        {
+            Assert.Fail();
+        }
+
+        [TestMethod]
+        public void IsOverlappingWith_time_method_returns_false_if_the_periods_are_not_overlapping()
+        {
+            Assert.Fail();
+        }
+
+        [TestMethod]
+        public void IsOverlappingWith_time_method_throws_an_exception_if_the_argument_is_null()
+        {
+            Assert.Fail();
+        }
+
+        [TestMethod]
         public void IsOverlappingWith_method_returns_true_if_the_periods_are_overlapping()
         {
             Assert.Fail();
