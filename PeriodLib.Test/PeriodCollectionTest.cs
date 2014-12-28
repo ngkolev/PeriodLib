@@ -166,6 +166,7 @@ namespace PeriodLib.Test
         [TestMethod]
         public void ToString_returns_correctly_formated_period_collection()
         {
+            CultureUtil.EnsureCulture();
             Assert.Fail();
         }
     }

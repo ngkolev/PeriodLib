@@ -61,6 +61,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="CultureUtil.cs" />
     <Compile Include="DateTimeExtensionsTest.cs" />
     <Compile Include="IPeriodEnumerableExtensionsTest.cs" />
     <Compile Include="IPeriodExtensionsTest.cs" />
