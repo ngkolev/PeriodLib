@@ -1,5 +1,7 @@
 ﻿using System;
+using Microsoft.QualityTools.Testing.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PeriodLib.Fakes;
 
 namespace PeriodLib.Test
 {

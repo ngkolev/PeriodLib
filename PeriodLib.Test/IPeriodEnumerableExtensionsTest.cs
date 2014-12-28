@@ -1,4 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.QualityTools.Testing.Fakes;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PeriodLib.Fakes;
 using PeriodLib.Fakes;
 using System;
 using System.Collections.Generic;

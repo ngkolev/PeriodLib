@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PeriodLib.Fakes;
 using System;
 using System.Collections.Generic;
+using System.Fakes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,19 +16,39 @@ namespace PeriodLib.Test
         [TestMethod]
         public void It_should_map_IPeriod_to_period()
         {
-            Assert.Fail();
+            var start = new DateTime(2014, 12, 28, 17, 16, 30);
+            var end = new DateTime(2015, 11, 29, 18, 14, 12);
+
+            var iPeriod = new StubIPeriod
+            {
+                StartGet = () => start,
+                EndGet = () => end,
+            };
+
+            var period = iPeriod.GetPeriod();
+
+            Assert.AreEqual(period.Start, start);
+            Assert.AreEqual(period.End, end);
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void It_should_throw_an_exception_if_argument_is_null()
         {
-            Assert.Fail();
+            StubIPeriod iPeriod = null;
+            iPeriod.GetPeriod();
         }
 
         [TestMethod]
         public void It_should_return_the_same_reference_if_the_IPeriod_is_already_a_Period_object()
         {
-            Assert.Fail();
+              var start = new DateTime(2014, 12, 28, 17, 16, 30);
+            var end = new DateTime(2015, 11, 29, 18, 14, 12);
+
+            var iPeriod = new Period(start, end);
+            var period = iPeriod.GetPeriod();
+
+           Assert.ReferenceEquals(iPeriod, period);
         }
     }
 }
