@@ -133,13 +133,13 @@ namespace PeriodLib.Test
         }
 
         [TestMethod]
-        public void Equals_period_return_true_for_equal_periods()
+        public void Equals_period_returns_true_for_equal_periods()
         {
             Assert.Fail();
         }
 
         [TestMethod]
-        public void Equals_period_return_false_for_not_equal_periods()
+        public void Equals_period_returns_false_for_not_equal_periods()
         {
             Assert.Fail();
         }
