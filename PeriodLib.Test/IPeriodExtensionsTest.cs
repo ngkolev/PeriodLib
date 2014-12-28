@@ -42,13 +42,13 @@ namespace PeriodLib.Test
         [TestMethod]
         public void It_should_return_the_same_reference_if_the_IPeriod_is_already_a_Period_object()
         {
-              var start = new DateTime(2014, 12, 28, 17, 16, 30);
+            var start = new DateTime(2014, 12, 28, 17, 16, 30);
             var end = new DateTime(2015, 11, 29, 18, 14, 12);
 
             var iPeriod = new Period(start, end);
             var period = iPeriod.GetPeriod();
 
-           Assert.ReferenceEquals(iPeriod, period);
+            Assert.ReferenceEquals(iPeriod, period);
         }
     }
 }
