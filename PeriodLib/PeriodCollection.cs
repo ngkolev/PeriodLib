@@ -89,7 +89,7 @@ namespace PeriodLib
         /// <param name="periods">The period collection argument</param>
         /// <returns>The new collection</returns>
         /// <exception cref="ArgumentNullException">Thrown if the argument is null</exception>
-        public Period GetIntersection(IEnumerable<IPeriod> periods)
+        public PeriodCollection GetIntersection(IEnumerable<IPeriod> periods)
         {
             throw new NotImplementedException();
         }
