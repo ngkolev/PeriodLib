@@ -20,7 +20,7 @@ namespace PeriodLib
         /// <param name="end">Period's end time</param>
         public Period(DateTime start, DateTime end)
         {
-            throw new NotImplementedException();
+            SetPeriod(start, end);
         }
 
         /// <summary>
@@ -30,7 +30,12 @@ namespace PeriodLib
         /// <exception cref="ArgumentNullException">Thrown when the argument is null</exception>
         public Period(IPeriod other)
         {
-            throw new NotImplementedException();
+            if (other == null)
+            {
+                throw new ArgumentNullException("other");
+            }
+
+            SetPeriod(other.Start, other.End);
         }
 
         /// <summary>
@@ -38,7 +43,6 @@ namespace PeriodLib
         /// </summary>
         public Period()
         {
-            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -48,7 +52,7 @@ namespace PeriodLib
         {
             get
             {
-                throw new NotImplementedException();
+                return DateTime.Now.GetDayPeriod();
             }
         }
 
@@ -59,7 +63,7 @@ namespace PeriodLib
         {
             get
             {
-                throw new NotImplementedException();
+                return DateTime.Now.GetWeekPeriod();
             }
         }
 
@@ -70,7 +74,7 @@ namespace PeriodLib
         {
             get
             {
-                throw new NotImplementedException();
+                return DateTime.Now.GetMonthPeriod();
             }
         }
 
@@ -81,7 +85,7 @@ namespace PeriodLib
         {
             get
             {
-                throw new NotImplementedException();
+                return DateTime.Now.GetYearPeriod();
             }
         }
 
@@ -102,7 +106,7 @@ namespace PeriodLib
         {
             get
             {
-                throw new NotImplementedException();
+                return Start.Date;
             }
         }
 
@@ -113,7 +117,7 @@ namespace PeriodLib
         {
             get
             {
-                throw new NotImplementedException();
+                return End.Date;
             }
         }
 
@@ -124,8 +128,29 @@ namespace PeriodLib
         {
             get
             {
-                throw new NotImplementedException();
+                return End - Start;
             }
+        }
+
+        public static bool operator ==(Period left, Period right)
+        {
+            if (Object.ReferenceEquals(left, right))
+            {
+                return true;
+            }
+            if (Object.ReferenceEquals(left, null) || Object.ReferenceEquals(right, null))
+            {
+                return false;
+            }
+            else
+            {
+                return left.Equals(right);
+            }
+        }
+
+        public static bool operator !=(Period left, Period right)
+        {
+            return !(left == right);
         }
 
         /// <summary>
@@ -135,7 +160,7 @@ namespace PeriodLib
         /// <returns>True if the time is inside the interval. Otherwise - false</returns>
         public bool IsOverlappingWith(DateTime time)
         {
-            throw new NotImplementedException();
+            return Start <= time && time < End;
         }
 
         /// <summary>
@@ -146,7 +171,7 @@ namespace PeriodLib
         /// <exception cref="ArgumentNullException">Thrown if the argument is null</exception>
         public bool IsOverlappingWith(IPeriod other)
         {
-            throw new NotImplementedException();
+            return other.Start < End && Start < other.End;
         }
 
         /// <summary>
@@ -157,7 +182,7 @@ namespace PeriodLib
         /// <exception cref="ArgumentNullException">Thrown if the argument is null</exception>
         public bool IsOverlappingWith(IEnumerable<IPeriod> periods)
         {
-            throw new NotImplementedException();
+            return periods.Any(p => p.GetPeriod().IsOverlappingWith(this));
         }
 
         /// <summary>
@@ -167,7 +192,9 @@ namespace PeriodLib
         /// <returns>True if the periods are equal</returns>
         public override bool Equals(object obj)
         {
-            throw new NotImplementedException();
+            var other = obj as Period;
+
+            return (other != null) ? Equals(other) : false;
         }
 
         /// <summary>
@@ -178,7 +205,12 @@ namespace PeriodLib
         /// <exception cref="ArgumentNullException">Thrown if the argument is null</exception>
         public bool Equals(IPeriod other)
         {
-            throw new NotImplementedException();
+            if (other == null)
+            {
+                throw new ArgumentNullException("other");
+            }
+
+            return Start == other.Start && End == other.End;
         }
 
         /// <summary>
@@ -187,7 +219,7 @@ namespace PeriodLib
         /// <returns>Period's hash</returns>
         public override int GetHashCode()
         {
-            throw new NotImplementedException();
+            return Start.GetHashCode() ^ End.GetHashCode();
         }
 
         /// <summary>
@@ -196,7 +228,11 @@ namespace PeriodLib
         /// <returns>Text representation of the period</returns>
         public override string ToString()
         {
-            throw new NotImplementedException();
+            return String.Format("{0} {1} - {2} {3}",
+                Start.ToShortDateString(),
+                Start.ToShortTimeString(),
+                End.ToShortDateString(),
+                End.ToShortTimeString());
         }
 
         /// <summary>
@@ -205,7 +241,20 @@ namespace PeriodLib
         /// <returns>Text representation of the period's start and end dates</returns>
         public string ToShortDateString()
         {
-            throw new NotImplementedException();
+            return String.Format("{0} - {1}",
+                Start.ToShortDateString(),
+                End.ToShortDateString());
+        }
+
+        private void SetPeriod(DateTime start, DateTime end)
+        {
+            if (end < start)
+            {
+                throw new ArgumentException("Start time should be less or equal to the end time");
+            }
+
+            Start = start;
+            End = end;
         }
     }
 }

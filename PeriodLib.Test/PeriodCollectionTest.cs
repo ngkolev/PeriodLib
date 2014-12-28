@@ -99,6 +99,13 @@ namespace PeriodLib.Test
         }
 
         [TestMethod]
+        public void Length_returns_zero_timespan_if_empty_period_collection()
+        {
+            var collection = new PeriodCollection();
+            Assert.AreEqual(collection.Length, TimeSpan.Zero);
+        }
+
+        [TestMethod]
         public void GetSet_returns_set_of_periods()
         {
             var period = new StubIPeriod
@@ -258,6 +265,7 @@ namespace PeriodLib.Test
         [TestMethod]
         public void Equals_period_collection_returns_false_for_not_equal_period_collections()
         {
+            Assert.IsFalse(Collection.Equals(new PeriodCollection()));
             Assert.IsFalse(Collection.Equals(OtherCollection));
         }
 
@@ -310,7 +318,7 @@ namespace PeriodLib.Test
             CultureUtil.EnsureCulture();
             var collectionString = Collection.ToString();
 
-            Assert.AreEqual(collectionString, "28.12.2014 00:00:00 - 29.12.2014 00:00:00, 23.11.2013 00:00:00 - 01.12.2012 00:00:00");
+            Assert.AreEqual(collectionString, "28.12.2014 г. 00:00 ч. - 29.12.2014 г. 00:00 ч., 23.11.2015 г. 00:00 ч. - 1.12.2016 г. 00:00 ч.");
         }
     }
 }

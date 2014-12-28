@@ -19,7 +19,13 @@ namespace PeriodLib
         /// <returns></returns>
         public static PeriodCollection ToCollection(this IEnumerable<IPeriod> periods)
         {
-            throw new NotImplementedException();
+            var result = periods as PeriodCollection;
+            if (result == null)
+            {
+                result = new PeriodCollection(periods);
+            }
+
+            return result;
         }
     }
 }

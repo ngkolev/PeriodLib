@@ -18,7 +18,7 @@ namespace PeriodLib.Test
             var start0 = new DateTime(2014, 12, 28);
             var end0 = new DateTime(2014, 12, 29);
             var start1 = new DateTime(2013, 11, 23);
-            var end1 = new DateTime(2012, 12, 1);
+            var end1 = new DateTime(2013, 12, 1);
 
             var items = new[] 
             { 

@@ -18,7 +18,10 @@ namespace PeriodLib
         /// <returns>Day period</returns>
         public static Period GetDayPeriod(this DateTime time)
         {
-            throw new NotImplementedException();
+            var start = time.Date;
+            var end = start.AddDays(1);
+
+            return new Period(start, end);
         }
 
         /// <summary>
@@ -28,7 +31,19 @@ namespace PeriodLib
         /// <returns>Week period</returns>
         public static Period GetWeekPeriod(this DateTime time)
         {
-            throw new NotImplementedException();
+            var date = time.Date;
+
+            var difference = date.DayOfWeek - DayOfWeek.Monday;
+            if (difference < 0) difference += 7;
+            var startTime = date.AddDays(-difference).Date;
+
+            difference = DayOfWeek.Sunday - date.DayOfWeek;
+            if (difference < 0) difference += 7;
+            var endTime = date.AddDays(difference).Date;
+
+            var correctedEndTime = endTime.AddDays(1);
+
+            return new Period(startTime, correctedEndTime);
         }
 
         /// <summary>
@@ -38,7 +53,9 @@ namespace PeriodLib
         /// <returns>Month period</returns>
         public static Period GetMonthPeriod(this DateTime time)
         {
-            throw new NotImplementedException();
+            var startTime = new DateTime(time.Year, time.Month, 1);
+            var endTime = startTime.AddMonths(1);
+            return new Period(startTime, endTime);
         }
 
         /// <summary>
@@ -48,7 +65,9 @@ namespace PeriodLib
         /// <returns>Year period</returns>
         public static Period GetYearPeriod(this DateTime time)
         {
-            throw new NotImplementedException();
+            var startTime = new DateTime(time.Year, 1, 1);
+            var endTime = startTime.AddYears(1);
+            return new Period(startTime, endTime);
         }
     }
 }

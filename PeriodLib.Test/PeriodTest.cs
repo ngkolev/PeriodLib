@@ -362,7 +362,7 @@ namespace PeriodLib.Test
             var period = new Period(start, end);
             var periodString = period.ToString();
 
-            Assert.AreEqual(periodString, "28.12.2014 17:16:30 - 29.11.2015 18:14:12");
+            Assert.AreEqual(periodString, "28.12.2014 г. 17:16 ч. - 29.11.2015 г. 18:14 ч.");
         }
 
         [TestMethod]
@@ -374,7 +374,7 @@ namespace PeriodLib.Test
             var period = new Period(start, end);
             var periodString = period.ToShortDateString();
 
-            Assert.AreEqual(periodString, "28.12.2014 - 29.11.2015");
+            Assert.AreEqual(periodString, "28.12.2014 г. - 29.11.2015 г.");
         }
     }
 }

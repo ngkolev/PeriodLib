@@ -18,7 +18,13 @@ namespace PeriodLib
         /// <returns>Period object</returns>
         public static Period GetPeriod(this IPeriod period)
         {
-            throw new NotImplementedException();
+            var result = period as Period;
+            if (result == null)
+            {
+                result = new Period(period);
+            }
+
+            return result;
         }
     }
 }

@@ -10,7 +10,7 @@ namespace PeriodLib
     /// <summary>
     /// This class represents collection of periods
     /// </summary>
-    public sealed class PeriodCollection : IEnumerable<Period>, IEquatable<Period>
+    public sealed class PeriodCollection : IEnumerable<IPeriod>, IEquatable<PeriodCollection>
     {
         /// <summary>
         /// Creates new period collection
@@ -19,7 +19,12 @@ namespace PeriodLib
         /// <exception cref="ArgumentNullException">Thrown if the argument is null</exception>
         public PeriodCollection(IEnumerable<IPeriod> period)
         {
-            throw new NotImplementedException();
+            if (period == null)
+            {
+                throw new ArgumentNullException("period");
+            }
+
+            Periods = period.Select(p => p.GetPeriod()).ToList();
         }
 
         /// <summary>
@@ -27,8 +32,10 @@ namespace PeriodLib
         /// </summary>
         public PeriodCollection()
         {
-            throw new NotImplementedException();
+            Periods = new List<Period>();
         }
+
+        private List<Period> Periods { get; set; }
 
         /// <summary>
         /// True if this collection is empty
@@ -37,7 +44,7 @@ namespace PeriodLib
         {
             get
             {
-                throw new NotImplementedException();
+                return !Periods.Any();
             }
         }
 
@@ -48,8 +55,30 @@ namespace PeriodLib
         {
             get
             {
-                throw new NotImplementedException();
+                var lengthInTicks = Periods.Sum(p => p.Length.Ticks);
+                return new TimeSpan(lengthInTicks);
             }
+        }
+
+        public static bool operator==(PeriodCollection left, PeriodCollection right)
+        {
+            if (Object.ReferenceEquals(left, right))
+            {
+                return true;
+            }
+            if (Object.ReferenceEquals(left, null) || Object.ReferenceEquals(right, null))
+            {
+                return false;
+            }
+            else
+            {
+                return left.Equals(right);
+            }
+        }
+
+        public static bool operator !=(PeriodCollection left, PeriodCollection right)
+        {
+            return !(left == right);
         }
 
         /// <summary>
@@ -58,7 +87,8 @@ namespace PeriodLib
         /// <returns>Set of periods</returns>
         public PeriodCollection GetSet()
         {
-            throw new NotImplementedException();
+            var items = this.Distinct();
+            return new PeriodCollection(items);
         }
 
         /// <summary>
@@ -69,7 +99,7 @@ namespace PeriodLib
         /// <exception cref="ArgumentNullException">Thrown if the argument is null</exception>
         public bool IsOverlappingWith(IEnumerable<IPeriod> periods)
         {
-            throw new NotImplementedException();
+            return Periods.Any(p => p.IsOverlappingWith(periods));
         }
 
         /// <summary>
@@ -80,6 +110,11 @@ namespace PeriodLib
         /// <exception cref="ArgumentNullException">Thrown if the argument is null</exception>
         public PeriodCollection GetDifference(IEnumerable<IPeriod> periods)
         {
+            if (periods == null)
+            {
+                throw new ArgumentNullException("periods");
+            }
+
             throw new NotImplementedException();
         }
 
@@ -91,6 +126,11 @@ namespace PeriodLib
         /// <exception cref="ArgumentNullException">Thrown if the argument is null</exception>
         public PeriodCollection GetIntersection(IEnumerable<IPeriod> periods)
         {
+            if (periods == null)
+            {
+                throw new ArgumentNullException("periods");
+            }
+
             throw new NotImplementedException();
         }
 
@@ -101,7 +141,8 @@ namespace PeriodLib
         /// <returns>True if the periods are equal</returns>
         public override bool Equals(object obj)
         {
-            throw new NotImplementedException();
+            var other = obj as PeriodCollection;
+            return (other != null) ? Equals(other) : false;
         }
 
         /// <summary>
@@ -110,9 +151,31 @@ namespace PeriodLib
         /// <param name="other">The other period</param>
         /// <returns>True if the periods are equal</returns>
         /// <exception cref="ArgumentNullException">Thrown if the argument is null</exception>
-        public bool Equals(Period other)
+        public bool Equals(PeriodCollection other)
         {
-            throw new NotImplementedException();
+            if (other == null)
+            {
+                throw new ArgumentNullException("other");
+            }
+
+            var groupsA = Periods.GroupBy(p => p).ToArray();
+            var groupsB = other.Select(p=>p.GetPeriod()).GroupBy(p => p).ToArray();
+
+            if (groupsA.Length != groupsB.Length)
+            {
+                return false;
+            }
+
+            foreach (var a in groupsA)
+            {
+                var b = groupsB.SingleOrDefault(i => i.Key == a.Key);
+                if (b == null || a.Count() != b.Count())
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         /// <summary>
@@ -121,7 +184,14 @@ namespace PeriodLib
         /// <returns>Period collection's hash</returns>
         public override int GetHashCode()
         {
-            throw new NotImplementedException();
+            int result = 0;
+
+            foreach (var period in Periods)
+            {
+                result ^= period.GetHashCode();
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -130,21 +200,21 @@ namespace PeriodLib
         /// <returns>Text representation of the period collection</returns>
         public override string ToString()
         {
-            throw new NotImplementedException();
+            return String.Join(", ", Periods);
         }
 
         /// <summary>
         /// Returns period collection enumerator
         /// </summary>
         /// <returns>Period collection enumerator</returns>
-        public IEnumerator<Period> GetEnumerator()
+        public IEnumerator<IPeriod> GetEnumerator()
         {
-            throw new NotImplementedException();
+            return Periods.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return Periods.GetEnumerator();
         }
     }
 }
