@@ -336,6 +336,16 @@ namespace PeriodLib
         }
 
         /// <summary>
+        /// Returns text representation of the period
+        /// </summary>
+        /// <param name="format">DateTime format</param>
+        /// <returns>Text representation of the period</returns>
+        public string ToString(string format)
+        {
+            return String.Format("{0} - {1}", Start.ToString(format), End.ToString(format));
+        }
+
+        /// <summary>
         /// Returns text representation of the period's start and end dates
         /// </summary>
         /// <returns>Text representation of the period's start and end dates</returns>

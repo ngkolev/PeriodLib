@@ -366,6 +366,18 @@ namespace PeriodLib.Test
         }
 
         [TestMethod]
+        public void ToString_format_returns_correctly_formated_period()
+        {
+            CultureUtil.EnsureCulture();
+            var start = new DateTime(2014, 12, 28, 17, 16, 30);
+            var end = new DateTime(2015, 11, 29, 18, 14, 12);
+            var period = new Period(start, end);
+            var periodString = period.ToString("yyyy");
+
+            Assert.AreEqual(periodString, "2014 - 2015");
+        }
+
+        [TestMethod]
         public void ToShortDateString_returns_correctly_formated_date_period()
         {
             CultureUtil.EnsureCulture();
