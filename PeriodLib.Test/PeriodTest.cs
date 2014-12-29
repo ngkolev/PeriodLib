@@ -19,8 +19,8 @@ namespace PeriodLib.Test
             var end = new DateTime(2015, 11, 29, 18, 14, 12);
             var period = new Period(start, end);
 
-            Assert.AreEqual(period.Start, start);
-            Assert.AreEqual(period.End, end);
+            Assert.AreEqual(start, period.Start);
+            Assert.AreEqual(end, period.End);
         }
 
         [TestMethod]
@@ -46,8 +46,8 @@ namespace PeriodLib.Test
 
             var period = new Period(iPeriod);
 
-            Assert.AreEqual(period.Start, start);
-            Assert.AreEqual(period.End, end);
+            Assert.AreEqual(start, period.Start);
+            Assert.AreEqual(end, period.End);
         }
 
 
@@ -55,8 +55,8 @@ namespace PeriodLib.Test
         public void Can_create_period_using_generic_constructor()
         {
             var period = new Period();
-            Assert.AreEqual(period.Start, DateTime.MinValue);
-            Assert.AreEqual(period.EndDate, DateTime.MinValue);
+            Assert.AreEqual(DateTime.MinValue, period.Start);
+            Assert.AreEqual(DateTime.MinValue, period.EndDate);
         }
 
 
@@ -80,8 +80,8 @@ namespace PeriodLib.Test
 
                 var period = Period.ThisDay;
 
-                Assert.AreEqual(period.Start, start);
-                Assert.AreEqual(period.End, end);
+                Assert.AreEqual(start, period.Start);
+                Assert.AreEqual(end, period.End);
             }
         }
 
@@ -98,8 +98,8 @@ namespace PeriodLib.Test
 
                 var period = Period.ThisWeek;
 
-                Assert.AreEqual(period.Start, start);
-                Assert.AreEqual(period.End, end);
+                Assert.AreEqual(start, period.Start);
+                Assert.AreEqual(end, period.End);
             }
         }
 
@@ -116,8 +116,8 @@ namespace PeriodLib.Test
 
                 var period = Period.ThisMonth;
 
-                Assert.AreEqual(period.Start, start);
-                Assert.AreEqual(period.End, end);
+                Assert.AreEqual(start, period.Start);
+                Assert.AreEqual(end, period.End);
             }
         }
 
@@ -134,8 +134,8 @@ namespace PeriodLib.Test
 
                 var period = Period.ThisYear;
 
-                Assert.AreEqual(period.Start, start);
-                Assert.AreEqual(period.End, end);
+                Assert.AreEqual(start, period.Start);
+                Assert.AreEqual(end, period.End);
             }
         }
 
@@ -146,7 +146,7 @@ namespace PeriodLib.Test
             var end = new DateTime(2015, 11, 29, 18, 14, 12);
             var period = new Period(start, end);
 
-            Assert.AreEqual(period.StartDate, new DateTime(2014, 12, 28));
+            Assert.AreEqual(new DateTime(2014, 12, 28), period.StartDate);
         }
 
         [TestMethod]
@@ -156,7 +156,7 @@ namespace PeriodLib.Test
             var end = new DateTime(2015, 11, 29, 18, 14, 12);
             var period = new Period(start, end);
 
-            Assert.AreEqual(period.EndDate, new DateTime(2015, 11, 29));
+            Assert.AreEqual(new DateTime(2015, 11, 29), period.EndDate);
         }
 
         [TestMethod]
@@ -166,7 +166,7 @@ namespace PeriodLib.Test
             var end = new DateTime(2015, 11, 29, 18, 14, 12);
             var period = new Period(start, end);
 
-            Assert.AreEqual(period.Length, end - start);
+            Assert.AreEqual(end - start, period.Length);
         }
 
         [TestMethod]
@@ -350,7 +350,7 @@ namespace PeriodLib.Test
             var period0 = new Period(new DateTime(2014, 12, 24), new DateTime(2015, 11, 27));
             var period1 = new Period(new DateTime(2014, 12, 24), new DateTime(2015, 11, 27));
 
-            Assert.AreEqual(period0.GetHashCode(), period1.GetHashCode());
+            Assert.AreEqual(period1.GetHashCode(), period0.GetHashCode());
         }
 
         [TestMethod]
@@ -362,7 +362,7 @@ namespace PeriodLib.Test
             var period = new Period(start, end);
             var periodString = period.ToString();
 
-            Assert.AreEqual(periodString, "28.12.2014 г. 17:16 ч. - 29.11.2015 г. 18:14 ч.");
+            Assert.AreEqual("28.12.2014 г. 17:16 ч. - 29.11.2015 г. 18:14 ч.", periodString);
         }
 
         [TestMethod]
@@ -374,7 +374,7 @@ namespace PeriodLib.Test
             var period = new Period(start, end);
             var periodString = period.ToString("yyyy");
 
-            Assert.AreEqual(periodString, "2014 - 2015");
+            Assert.AreEqual("2014 - 2015", periodString);
         }
 
         [TestMethod]
@@ -386,7 +386,7 @@ namespace PeriodLib.Test
             var period = new Period(start, end);
             var periodString = period.ToShortDateString();
 
-            Assert.AreEqual(periodString, "28.12.2014 г. - 29.11.2015 г.");
+            Assert.AreEqual("28.12.2014 г. - 29.11.2015 г.", periodString);
         }
     }
 }

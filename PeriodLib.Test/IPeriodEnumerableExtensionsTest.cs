@@ -28,10 +28,10 @@ namespace PeriodLib.Test
 
             var collection = items.ToCollection().ToArray();
 
-            Assert.AreEqual(collection[0].Start, start0);
-            Assert.AreEqual(collection[0].End, end0);
-            Assert.AreEqual(collection[1].Start, start1);
-            Assert.AreEqual(collection[1].End, end1);
+            Assert.AreEqual(start0, collection[0].Start);
+            Assert.AreEqual(end0, collection[0].End);
+            Assert.AreEqual(start1, collection[1].Start);
+            Assert.AreEqual(end1, collection[1].End);
         }
 
         [TestMethod]

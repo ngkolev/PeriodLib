@@ -27,8 +27,8 @@ namespace PeriodLib.Test
 
             var period = iPeriod.GetPeriod();
 
-            Assert.AreEqual(period.Start, start);
-            Assert.AreEqual(period.End, end);
+            Assert.AreEqual(start, period.Start);
+            Assert.AreEqual(end, period.End);
         }
 
         [TestMethod]

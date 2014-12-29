@@ -59,10 +59,10 @@ namespace PeriodLib.Test
         {
             var collection = Collection.ToArray();
 
-            Assert.AreEqual(collection[0].Start, Start0);
-            Assert.AreEqual(collection[0].End, End0);
-            Assert.AreEqual(collection[1].Start, Start1);
-            Assert.AreEqual(collection[1].End, End1);
+            Assert.AreEqual(Start0, collection[0].Start);
+            Assert.AreEqual(End0, collection[0].End);
+            Assert.AreEqual(Start1, collection[1].Start);
+            Assert.AreEqual(End1, collection[1].End);
         }
 
         [TestMethod]
@@ -76,7 +76,7 @@ namespace PeriodLib.Test
         public void Can_create_PeriodCollection_using_generic_constructor()
         {
             var collection = new PeriodCollection();
-            Assert.AreEqual(collection.Count(), 0);
+            Assert.AreEqual(0, collection.Count());
         }
 
         [TestMethod]
@@ -95,14 +95,14 @@ namespace PeriodLib.Test
         [TestMethod]
         public void Length_returns_the_sum_of_the_lengths_of_the_periods()
         {
-            Assert.AreEqual(Collection.Length, (End0 - Start0) + (End1 - Start1));
+            Assert.AreEqual((End0 - Start0) + (End1 - Start1), Collection.Length);
         }
 
         [TestMethod]
         public void Length_returns_zero_timespan_if_empty_period_collection()
         {
             var collection = new PeriodCollection();
-            Assert.AreEqual(collection.Length, TimeSpan.Zero);
+            Assert.AreEqual(TimeSpan.Zero, collection.Length);
         }
 
         [TestMethod]
@@ -123,9 +123,9 @@ namespace PeriodLib.Test
             var collection = new PeriodCollection(items);
             var result = collection.GetSet();
 
-            Assert.AreEqual(result.Count(), 1);
-            Assert.AreEqual(result.Single().Start, Start0);
-            Assert.AreEqual(result.Single().End, End0);
+            Assert.AreEqual(1, result.Count());
+            Assert.AreEqual(Start0, result.Single().Start);
+            Assert.AreEqual(End0, result.Single().End);
         }
 
         [TestMethod]
@@ -175,7 +175,7 @@ namespace PeriodLib.Test
                  new StubIPeriod{ StartGet = () => new DateTime(2001, 12, 28), EndGet = () => new DateTime(2024, 12, 28) },
             });
 
-            Assert.AreEqual(Collection.GetDifference(collection0).Count(), 0);
+            Assert.AreEqual(0, Collection.GetDifference(collection0).Count());
 
             // 1
             var collection1 = new PeriodCollection(new[] 
@@ -184,9 +184,9 @@ namespace PeriodLib.Test
             });
 
             var difference1 = Collection.GetDifference(collection1);
-            Assert.AreEqual(difference1.Count(), 1);
-            Assert.AreEqual(difference1.Single().Start, Start1);
-            Assert.AreEqual(difference1.Single().End, End1);
+            Assert.AreEqual(1, difference1.Count());
+            Assert.AreEqual(Start1, difference1.Single().Start);
+            Assert.AreEqual(End1, difference1.Single().End);
 
             // 2
             var collection2 = new PeriodCollection(new[] 
@@ -195,7 +195,7 @@ namespace PeriodLib.Test
             });
 
             var difference2 = Collection.GetDifference(collection2);
-            Assert.AreEqual(difference2.Count(), 3);
+            Assert.AreEqual(3, difference2.Count());
             Assert.IsTrue(difference2.Any(p => p.Start == Start0 && p.End == End0));
             Assert.IsTrue(difference2.Any(p => p.Start == Start1 && p.End == new DateTime(2015, 11, 24)));
             Assert.IsTrue(difference2.Any(p => p.Start == new DateTime(2015, 11, 25) && p.End == End1));
@@ -219,9 +219,9 @@ namespace PeriodLib.Test
             });
 
             var intersection0 = Collection.GetIntersection(collection0);
-            Assert.AreEqual(intersection0.Count(), 1);
-            Assert.AreEqual(intersection0.Single().Start, new DateTime(2015, 11, 24));
-            Assert.AreEqual(intersection0.Single().End, new DateTime(2015, 11, 25));
+            Assert.AreEqual(1, intersection0.Count());
+            Assert.AreEqual(new DateTime(2015, 11, 24), intersection0.Single().Start);
+            Assert.AreEqual(new DateTime(2015, 11, 25), intersection0.Single().End);
 
             // 1
             var collection1 = new PeriodCollection(new[] 
@@ -229,7 +229,7 @@ namespace PeriodLib.Test
                  new StubIPeriod{ StartGet = () => new DateTime(2001, 11, 24), EndGet = () => new DateTime(2021, 11, 25) },
             });
             var intersection1 = Collection.GetIntersection(collection1);
-            Assert.AreEqual(intersection1.Count(), 2);
+            Assert.AreEqual(2, intersection1.Count());
             Assert.IsTrue(intersection1.Any(p => p.Start == Start0 && p.End == End0));
             Assert.IsTrue(intersection1.Any(p => p.Start == Start1 && p.End == End1));
         }
@@ -309,7 +309,7 @@ namespace PeriodLib.Test
             var collection0 = new PeriodCollection(Collection.ToArray());
             var collection1 = new PeriodCollection(Collection.ToArray());
 
-            Assert.AreEqual(collection0.GetHashCode(), collection1.GetHashCode());
+            Assert.AreEqual(collection1.GetHashCode(), collection0.GetHashCode());
         }
 
         [TestMethod]
@@ -318,7 +318,7 @@ namespace PeriodLib.Test
             CultureUtil.EnsureCulture();
             var collectionString = Collection.ToString();
 
-            Assert.AreEqual(collectionString, "28.12.2014 г. 00:00 ч. - 29.12.2014 г. 00:00 ч., 23.11.2015 г. 00:00 ч. - 1.12.2016 г. 00:00 ч.");
+            Assert.AreEqual("28.12.2014 г. 00:00 ч. - 29.12.2014 г. 00:00 ч., 23.11.2015 г. 00:00 ч. - 1.12.2016 г. 00:00 ч.", collectionString);
         }
     }
 }

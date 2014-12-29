@@ -21,8 +21,8 @@ namespace PeriodLib.Test
             var end = new DateTime(2014, 12, 29);
             var period = time.GetDayPeriod();
 
-            Assert.AreEqual(period.Start, start);
-            Assert.AreEqual(period.End, end);
+            Assert.AreEqual(start, period.Start);
+            Assert.AreEqual(end, period.End);
         }
 
         [TestMethod]
@@ -33,8 +33,8 @@ namespace PeriodLib.Test
             var end = new DateTime(2014, 12, 29);
             var period = time.GetWeekPeriod();
 
-            Assert.AreEqual(period.Start, start);
-            Assert.AreEqual(period.End, end);
+            Assert.AreEqual(start, period.Start);
+            Assert.AreEqual(end, period.End);
         }
 
         [TestMethod]
@@ -45,8 +45,8 @@ namespace PeriodLib.Test
             var end = new DateTime(2015, 1, 1);
             var period = time.GetMonthPeriod();
 
-            Assert.AreEqual(period.Start, start);
-            Assert.AreEqual(period.End, end);
+            Assert.AreEqual(start, period.Start);
+            Assert.AreEqual(end, period.End);
         }
 
         [TestMethod]
@@ -57,8 +57,8 @@ namespace PeriodLib.Test
             var end = new DateTime(2015, 1, 1);
             var period = time.GetYearPeriod();
 
-            Assert.AreEqual(period.Start, start);
-            Assert.AreEqual(period.End, end);
+            Assert.AreEqual(start, period.Start);
+            Assert.AreEqual(end, period.End);
         }
     }
 }
