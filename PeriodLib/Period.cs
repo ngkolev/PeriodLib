@@ -191,6 +191,101 @@ namespace PeriodLib
         }
 
         /// <summary>
+        /// Gets intersection between period and collection of periods
+        /// </summary>
+        /// <param name="periods">Collection of periods which to be used for intersection</param>
+        /// <returns>Returns intersection between period and collection of periods</returns>
+        public PeriodCollection GetIntersection(IEnumerable<IPeriod> periods)
+        {
+            var resultItems = new List<Period>();
+
+            var intervalsList = periods
+                        .Where(x => this.Start <= x.End && x.Start <= this.End)
+                        .OrderBy(x => x.Start)
+                        .ToList();
+
+            if (intervalsList.Count() > 0)
+            {
+                var itemStartTime = this.Start;
+                var itemEndTime = this.End;
+
+                for (int i = 0; i < intervalsList.Count; i++)
+                {
+                    Period itemToAdd;
+                    var overlayOvertime = intervalsList[i];
+
+                    if (i < intervalsList.Count - 1)
+                    {
+                        var nextOvertime = intervalsList[i + 1];
+
+                        itemToAdd = new Period(
+                            Max(overlayOvertime.Start, itemStartTime),
+                            Min(nextOvertime.Start, overlayOvertime.End));
+
+                        itemStartTime = nextOvertime.Start;
+                    }
+                    else
+                    {
+                        itemToAdd = new Period(
+                            Max(overlayOvertime.Start, itemStartTime),
+                            Min(itemEndTime, overlayOvertime.End));
+                    }
+
+                    resultItems.Add(itemToAdd);
+                }
+            }
+
+            return new PeriodCollection(resultItems);
+        }
+
+        /// <summary>
+        /// Gets difference between period and collection of periods
+        /// </summary>
+        /// <param name="periods">Collection of periods which to be used for difference</param>
+        /// <returns>Returns difference between period and collection of periods</returns>
+        public PeriodCollection GetDifference(IEnumerable<IPeriod> periods)
+        {
+            var resultItems = new List<Period>();
+            var itemTimeStart = this.Start;
+
+            var overlappingIntervals = periods
+                    .Where(x => this.Start <= x.End && x.Start <= this.End)
+                    .OrderBy(x => x.Start)
+                    .ToList();
+
+            if (overlappingIntervals.Count() > 0)
+            {
+                var itemStartTime = this.Start;
+                var itemEndTime = this.End;
+
+                for (int i = 0; i < overlappingIntervals.Count; i++)
+                {
+                    var interval = overlappingIntervals[i];
+
+                    if (itemStartTime < interval.Start)
+                    {
+                        var intervalToAdd = new Period(itemStartTime, interval.Start);
+                        resultItems.Add(intervalToAdd);
+                    }
+
+                    itemStartTime = interval.End;
+                }
+
+                if (itemStartTime < itemEndTime)
+                {
+                    var intervalToAdd = new Period(itemStartTime, itemEndTime);
+                    resultItems.Add(intervalToAdd);
+                }
+            }
+            else
+            {
+                resultItems.Add(this);
+            }
+
+            return new PeriodCollection(resultItems);
+        }
+
+        /// <summary>
         /// Checks if two periods are equal
         /// </summary>
         /// <param name="obj">The other period</param>
@@ -260,6 +355,16 @@ namespace PeriodLib
 
             Start = start;
             End = end;
+        }
+
+        private static DateTime Max(DateTime a, DateTime b)
+        {
+            return a < b ? b : a;
+        }
+
+        private static DateTime Min(DateTime a, DateTime b)
+        {
+            return a < b ? a : b;
         }
     }
 }

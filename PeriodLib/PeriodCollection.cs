@@ -60,7 +60,7 @@ namespace PeriodLib
             }
         }
 
-        public static bool operator==(PeriodCollection left, PeriodCollection right)
+        public static bool operator ==(PeriodCollection left, PeriodCollection right)
         {
             if (Object.ReferenceEquals(left, right))
             {
@@ -115,7 +115,9 @@ namespace PeriodLib
                 throw new ArgumentNullException("periods");
             }
 
-            throw new NotImplementedException();
+            var resultItems = this.Periods.SelectMany(p => p.GetDifference(periods));
+
+            return new PeriodCollection(resultItems);
         }
 
         /// <summary>
@@ -131,7 +133,9 @@ namespace PeriodLib
                 throw new ArgumentNullException("periods");
             }
 
-            throw new NotImplementedException();
+            var resultItems = this.Periods.SelectMany(p => p.GetIntersection(periods));
+
+            return new PeriodCollection(resultItems);
         }
 
         /// <summary>
@@ -159,7 +163,7 @@ namespace PeriodLib
             }
 
             var groupsA = Periods.GroupBy(p => p).ToArray();
-            var groupsB = other.Select(p=>p.GetPeriod()).GroupBy(p => p).ToArray();
+            var groupsB = other.Select(p => p.GetPeriod()).GroupBy(p => p).ToArray();
 
             if (groupsA.Length != groupsB.Length)
             {

@@ -183,7 +183,7 @@ namespace PeriodLib.Test
                  new StubIPeriod{ StartGet = () => Start0, EndGet = () => End0 },
             });
 
-            var difference1 = Collection.GetDifference(collection0);
+            var difference1 = Collection.GetDifference(collection1);
             Assert.AreEqual(difference1.Count(), 1);
             Assert.AreEqual(difference1.Single().Start, Start1);
             Assert.AreEqual(difference1.Single().End, End1);
@@ -228,7 +228,7 @@ namespace PeriodLib.Test
             { 
                  new StubIPeriod{ StartGet = () => new DateTime(2001, 11, 24), EndGet = () => new DateTime(2021, 11, 25) },
             });
-            var intersection1 = Collection.GetIntersection(collection0);
+            var intersection1 = Collection.GetIntersection(collection1);
             Assert.AreEqual(intersection1.Count(), 2);
             Assert.IsTrue(intersection1.Any(p => p.Start == Start0 && p.End == End0));
             Assert.IsTrue(intersection1.Any(p => p.Start == Start1 && p.End == End1));
