@@ -30,8 +30,10 @@ namespace PeriodLib.Test
 
             Assert.AreEqual(start0, collection[0].Start);
             Assert.AreEqual(end0, collection[0].End);
+            Assert.IsNull(collection[0].Data);
             Assert.AreEqual(start1, collection[1].Start);
             Assert.AreEqual(end1, collection[1].End);
+            Assert.IsNull(collection[1].Data);
         }
 
         [TestMethod]

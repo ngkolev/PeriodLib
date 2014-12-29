@@ -23,6 +23,7 @@ namespace PeriodLib.Test
 
             Assert.AreEqual(start, period.Start);
             Assert.AreEqual(end, period.End);
+            Assert.IsNull(period.Data);
         }
 
         [TestMethod]

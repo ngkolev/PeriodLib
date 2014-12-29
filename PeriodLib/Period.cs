@@ -18,9 +18,10 @@ namespace PeriodLib
         /// </summary>
         /// <param name="start">Period's start time</param>
         /// <param name="end">Period's end time</param>
-        public Period(DateTime start, DateTime end)
+        /// <param name="data">Optional data object associated with the time period</param>
+        public Period(DateTime start, DateTime end, object data = null)
         {
-            SetPeriod(start, end);
+            SetPeriod(start, end, data);
         }
 
         /// <summary>
@@ -35,7 +36,9 @@ namespace PeriodLib
                 throw new ArgumentNullException("other");
             }
 
-            SetPeriod(other.Start, other.End);
+            var data = (other is Period) ? ((Period)other).Data : null;
+
+            SetPeriod(other.Start, other.End, data);
         }
 
         /// <summary>
@@ -98,6 +101,11 @@ namespace PeriodLib
         /// Periods' end
         /// </summary>
         public DateTime End { get; private set; }
+
+        /// <summary>
+        /// Optional data object associated with the time period
+        /// </summary>
+        public object Data { get; private set; }
 
         /// <summary>
         /// Date of period's start
@@ -220,7 +228,8 @@ namespace PeriodLib
 
                         itemToAdd = new Period(
                             Max(overlayOvertime.Start, itemStartTime),
-                            Min(nextOvertime.Start, overlayOvertime.End));
+                            Min(nextOvertime.Start, overlayOvertime.End),
+                            this.Data);
 
                         itemStartTime = nextOvertime.Start;
                     }
@@ -228,7 +237,8 @@ namespace PeriodLib
                     {
                         itemToAdd = new Period(
                             Max(overlayOvertime.Start, itemStartTime),
-                            Min(itemEndTime, overlayOvertime.End));
+                            Min(itemEndTime, overlayOvertime.End),
+                            this.Data);
                     }
 
                     resultItems.Add(itemToAdd);
@@ -264,7 +274,7 @@ namespace PeriodLib
 
                     if (itemStartTime < interval.Start)
                     {
-                        var intervalToAdd = new Period(itemStartTime, interval.Start);
+                        var intervalToAdd = new Period(itemStartTime, interval.Start, this.Data);
                         resultItems.Add(intervalToAdd);
                     }
 
@@ -273,7 +283,7 @@ namespace PeriodLib
 
                 if (itemStartTime < itemEndTime)
                 {
-                    var intervalToAdd = new Period(itemStartTime, itemEndTime);
+                    var intervalToAdd = new Period(itemStartTime, itemEndTime, this.Data);
                     resultItems.Add(intervalToAdd);
                 }
             }
@@ -310,7 +320,12 @@ namespace PeriodLib
                 throw new ArgumentNullException("other");
             }
 
-            return Start == other.Start && End == other.End;
+            if (Start != other.Start || End != other.End)
+            {
+                return false;
+            }
+
+            return !(other is Period) || Data == ((Period)other).Data;
         }
 
         /// <summary>
@@ -319,7 +334,13 @@ namespace PeriodLib
         /// <returns>Period's hash</returns>
         public override int GetHashCode()
         {
-            return Start.GetHashCode() ^ End.GetHashCode();
+            var result = Start.GetHashCode() ^ End.GetHashCode();
+            if (Data !=null)
+            {
+                result ^= Data.GetHashCode();
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -356,7 +377,7 @@ namespace PeriodLib
                 End.ToShortDateString());
         }
 
-        private void SetPeriod(DateTime start, DateTime end)
+        private void SetPeriod(DateTime start, DateTime end, object data)
         {
             if (end < start)
             {
@@ -365,6 +386,7 @@ namespace PeriodLib
 
             Start = start;
             End = end;
+            Data = data;
         }
 
         private static DateTime Max(DateTime a, DateTime b)

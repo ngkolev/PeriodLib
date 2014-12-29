@@ -10,7 +10,7 @@ namespace PeriodLib
     /// <summary>
     /// This class represents collection of periods
     /// </summary>
-    public sealed class PeriodCollection : IEnumerable<IPeriod>, IEquatable<PeriodCollection>
+    public sealed class PeriodCollection : IEnumerable<Period>, IEquatable<PeriodCollection>
     {
         /// <summary>
         /// Creates new period collection
@@ -211,7 +211,7 @@ namespace PeriodLib
         /// Returns period collection enumerator
         /// </summary>
         /// <returns>Period collection enumerator</returns>
-        public IEnumerator<IPeriod> GetEnumerator()
+        public IEnumerator<Period> GetEnumerator()
         {
             return Periods.GetEnumerator();
         }
